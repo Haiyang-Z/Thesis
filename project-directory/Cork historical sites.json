@@ -1,0 +1,14 @@
+{
+    "name": "St Fin Barre's Cathedral",
+    "description": "St Fin Barre's Cathedral is a famous church in Cork, known for its magnificent architecture and historical background, attracting many tourists.",
+    "image_file": "./media/sfinbarr1.jpg",
+    "tangibility": 3,
+    "address": "Cork, Ireland",
+    "opening_hours": "Daily 9:00 - 17:00",
+    "ticket_price": "Adult €6, Student €4, Children Free",
+    "website": "https://www.choralevensong.org/uk/st-fin-barres-cathedral-cork-279.php?gad_source=1&gclid=EAIaIQobChMIrfy1_NeGhwMVtYBQBh2GnAMmEAAYASAAEgLae_D_BwE",
+    "contact": {
+        "phone": "+353 (0)21 4963387",
+        "email": "cathedral@cork.anglican.org"
+    }
+}
