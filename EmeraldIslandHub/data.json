@@ -1,0 +1,38 @@
+[
+    {
+        "img": "images/2.jpg",
+        "title": "Cliffs of Moher, Galway",
+        "date": "April 14, 2015",
+        "opening_hours": "Every day"
+    },
+    {
+        "img": "images/3.jpg",
+        "title": "Cohb, Cork",
+        "date": "April 14, 2015",
+        "opening_hours": "Every day"
+    },
+    {
+        "img": "images/4.jpg",
+        "title": "Trinity College Dublin, Dublin",
+        "date": "April 14, 2015",
+        "opening_hours": "Every day"
+    },
+    {
+        "img": "images/5.jpg",
+        "title": "Killarney National Park, Co. Kerry",
+        "date": "April 14, 2015",
+        "opening_hours": "Every day"
+    },
+    {
+        "img": "images/6.jpg",
+        "title": "Ashford Castle, Co. Mayo",
+        "date": "April 14, 2015",
+        "opening_hours": "Every day"
+    },
+    {
+        "img": "images/7.jpg",
+        "title": "Kylemore Abbey, Galway",
+        "date": "April 14, 2015",
+        "opening_hours": "Every day"
+    }
+]
