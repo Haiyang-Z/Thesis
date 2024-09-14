@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>爱尔兰旅游连接</title>
+    <meta name="description" content="找到你的新伙伴">
+    <meta name="author" content="Haiyang Zheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+</head>
+
+<body>
+    <div class="wrap-body">
+        <header class="no-bg">
+            <div class="nav-bar">
+                <div class="wrap-nav zerogrid">
+                    <div class="row">
+                        <div class="col-1-3">
+                            <div class="wrap-col">
+                                <div class="logo"><a href="#"><img src="images/logo.png" /></a></div>
+                            </div>
+                        </div>
+                        <div class="col-2-3">
+                            <div class="wrap-col f-right">
+                                <div id="menu">
+                                    <nav>
+                                        <ul>
+                                            <li><a href="home_cn.html">首页</a></li>
+                                            <li class="active"><a href="map_cn.html">地图</a></li>
+                                            <li><a href="map_en.html"><img src="images/translation.png"
+                                                        alt="中文翻译成英文"></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Container -->
+        <section id="container">
+            <div class="wrap-container">
+                <!-- Map Section -->
+                <span class="map-title">探索新的旅行目的地！</span>
+                <section id="map-section">
+                    <div id="map"></div>
+                </section>
+
+                <!-- new -->
+                <div id="user-form">
+                    <form id="marker-form">
+                        <!-- 合并后的标题 -->
+                        <h3>计划您的旅程</h3>
+
+                        <div class="form-section-wrapper">
+                            <!-- 左侧部分：计划您的旅程 -->
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="visit-date">访问日期：</label>
+                                    <input type="date" id="visit-date" name="visit-date" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="people-count">人数：</label>
+                                    <input type="number" id="people-count" name="people-count" min="1" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="transport">交通方式：</label>
+                                    <select id="transport" name="transport" required>
+                                        <option value="Car">自驾</option>
+                                        <option value="Bus">大巴</option>
+                                        <option value="Train">火车</option>
+                                        <option value="Bicycle">自行车</option>
+                                        <option value="Walking">步行</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">电话号码：</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+
+                            <!-- 右侧部分：您的信息 -->
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="name">姓名：</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="age">年龄：</label>
+                                    <input type="number" id="age" name="age" min="1" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gender">性别：</label>
+                                    <select id="gender" name="gender" required>
+                                        <option value="Male">男</option>
+                                        <option value="Female">女</option>
+                                        <option value="Other">其他</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="wechat">微信号：</label>
+                                    <input type="text" id="wechat" name="wechat" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 底部按钮容器 -->
+                        <div class="button-container">
+                            <button id="add-marker-btn" type="button">在地图上设置您的目的地</button>
+                            <button type="submit">提交</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+
+            </div>
+        </section>
+
+        <!--////////////////////////////////////Footer-->
+        <footer>
+            <div class="zerogrid">
+                <div class="wrap-footer row">
+                    <!-- 公司信息 -->
+                    <div class="col-1-3">
+                        <p>Mardyke Hall, Mardyke Walk, 科克, 爱尔兰</p>
+                        <p>电子邮箱: 123104052@umail.ucc.ie</p>
+                        <p>电话: +353 87 7050685</p>
+                    </div>
+                    <!-- 快速链接 -->
+                    <div class="col-1-3 quick-links">
+                        <h3>快速链接</h3>
+                        <ul>
+                            <li><a href="home_cn.html">首页</a></li>
+                            <li><a href="map_cn.html">地图</a></li>
+                        </ul>
+                    </div>
+                    <!-- 最新资讯 -->
+                    <div class="col-1-3 latest-news">
+                        <h3>最新资讯</h3>
+                        <ul>
+                            <li><a
+                                    href="https://www.ireland.ie/en/china/beijing/services/visas/check-if-you-need-a-visa/">中国游客签证要求</a>
+                            </li>
+                            <li><a
+                                    href="https://www.citizensinformation.ie/en/travel-and-recreation/travel-to-ireland/customs-regulations-for-travellers/">爱尔兰海关规定</a>
+                            </li>
+                            <li><a
+                                    href="https://www.ireland.ie/en/dfa/overseas-travel/know-before-you-go/safety-and-security/">健康与安全指南</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <!-- 用户信息弹窗 -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <span id="close-modal" class="close-button">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- !!!!!!!!!!!!Weather Widget!!!!!!!!!!!! -->
+    <div id="weather-toggle" class="weather-toggle">
+        <button id="weather-btn" class="weather-btn">快速天气</button>
+    </div>
+
+    <div id="weather-widget" class="weather-widget hidden">
+        <div class="weather-header">
+            <h3></h3>
+            <button id="close-weather" class="close-weather">&times;</button>
+        </div>
+        <div id="weather-info">加载天气数据中...</div>
+    </div>
+
+
+
+    <!-- 汇率转换小部件 -->
+    <div id="exchange-widget-toggle" class="exchange-widget-toggle">
+        <button id="exchange-btn" class="exchange-btn">简易转换器</button>
+    </div>
+
+    <div id="exchange-widget" class="exchange-widget hidden">
+        <div class="exchange-header">
+            <h3>货币转换器</h3>
+            <button id="close-exchange" class="close-exchange">&times;</button>
+        </div>
+        <div class="exchange-content">
+            <label for="currency-input">输入金额：</label>
+            <input type="number" id="currency-input" placeholder="金额">
+            <select id="currency-type">
+                <option value="CNY">人民币到欧元</option>
+                <option value="EUR">欧元到人民币</option>
+            </select>
+            <button id="convert-btn">转换</button>
+            <p id="conversion-result"></p>
+        </div>
+    </div>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!weather widget Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        // 城市数据及其坐标
+        const cities = [
+            { name: '都柏林', latitude: 53.3498, longitude: -6.2603 },
+            { name: '科克', latitude: 51.8985, longitude: -8.4756 },
+            { name: '戈尔韦', latitude: 53.2707, longitude: -9.0568 },
+            { name: '利默里克', latitude: 52.6638, longitude: -8.6267 },
+            { name: '沃特福德', latitude: 52.2593, longitude: -7.1101 },
+            { name: '基尔肯尼', latitude: 52.6541, longitude: -7.2448 }
+        ];
+
+        // 基于代码的天气描述
+        const weatherConditions = {
+            0: "晴天",
+            1: "多云转晴",
+            2: "局部多云",
+            3: "阴天",
+            45: "雾",
+            48: "霜雾",
+            51: "小毛毛雨",
+            53: "中毛毛雨",
+            55: "大毛毛雨",
+            61: "小雨",
+            63: "中雨",
+            65: "大雨",
+            80: "阵雨",
+            95: "雷暴"
+        };
+
+        // 加载天气数据
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherInfo = document.getElementById('weather-info');
+            weatherInfo.innerHTML = ''; // 清除内容
+
+            // 获取每个城市的天气数据
+            cities.forEach(city => {
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Europe/Dublin`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const weatherData = data.daily;
+
+                        // 获取天气描述
+                        const todayWeather = weatherConditions[weatherData.weathercode[0]];
+                        const tomorrowWeather = weatherConditions[weatherData.weathercode[1]];
+
+                        const cityWeather = `
+                        <div class="city-weather">
+                            <h4>${city.name}</h4>
+                            <p>今天: 最高 ${weatherData.temperature_2m_max[0]}°C, 最低 ${weatherData.temperature_2m_min[0]}°C, ${todayWeather}</p>
+                            <p>明天: 最高 ${weatherData.temperature_2m_max[1]}°C, 最低 ${weatherData.temperature_2m_min[1]}°C, ${tomorrowWeather}</p>
+                        </div>
+                    `;
+                        weatherInfo.innerHTML += cityWeather;
+                    })
+                    .catch(error => {
+                        console.error('获取天气数据时出错:', error);
+                        weatherInfo.innerHTML += `<div class="city-weather"><h4>${city.name}</h4><p>无法加载天气数据。</p></div>`;
+                    });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherBtn = document.getElementById('weather-btn');
+            const weatherWidget = document.getElementById('weather-widget');
+            const closeWeatherBtn = document.getElementById('close-weather');
+
+            // 点击按钮时显示天气小部件
+            weatherBtn.addEventListener('click', function () {
+                weatherWidget.classList.add('visible');
+                weatherBtn.style.display = 'none'; // 隐藏按钮
+            });
+
+            // 点击关闭按钮时隐藏天气小部件
+            closeWeatherBtn.addEventListener('click', function () {
+                weatherWidget.classList.remove('visible');
+                weatherBtn.style.display = 'block'; // 显示按钮
+            });
+        });
+    </script>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!exchange widget Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const exchangeBtn = document.getElementById('exchange-btn');
+            const exchangeWidget = document.getElementById('exchange-widget');
+            const closeExchangeBtn = document.getElementById('close-exchange');
+            const convertBtn = document.getElementById('convert-btn');
+            const currencyInput = document.getElementById('currency-input');
+            const conversionResult = document.getElementById('conversion-result');
+            const currencyType = document.getElementById('currency-type');
+
+            // 显示汇率转换部件
+            exchangeBtn.addEventListener('click', function () {
+                exchangeWidget.classList.add('visible');
+                exchangeBtn.style.display = 'none';
+            });
+
+            // 隐藏汇率转换部件并清空输入
+            closeExchangeBtn.addEventListener('click', function () {
+                exchangeWidget.classList.remove('visible');
+                exchangeBtn.style.display = 'block';
+                currencyInput.value = ''; // 清空输入框
+                conversionResult.textContent = '转换结果：--'; // 重置结果文本
+            });
+
+            // 汇率转换功能
+            convertBtn.addEventListener('click', function () {
+                const amount = parseFloat(currencyInput.value);
+
+                // 验证输入是否为正数且不为零
+                if (isNaN(amount) || amount <= 0) {
+                    conversionResult.textContent = "请输入一个大于0的有效金额。";
+                    return;
+                }
+
+
+                const exchangeRate = 7.87;
+                let result;
+
+                if (currencyType.value === "CNY") {
+                    result = amount / exchangeRate;
+                    conversionResult.textContent = `转换结果：${amount} 人民币 = ${result.toFixed(2)} 欧元`;
+                } else {
+                    result = amount * exchangeRate;
+                    conversionResult.textContent = `转换结果：${amount} 欧元 = ${result.toFixed(2)} 人民币`;
+                }
+            });
+        });
+    </script>
+
+
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!map Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!地图脚本!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+    <!-- 引入 Leaflet.js -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 定义英文到中文的映射表
+            var translationMap = {
+                'Male': '男',
+                'Female': '女',
+                'Other': '其他',
+                'Car': '自驾',
+                'Bus': '大巴',
+                'Train': '火车',
+                'Bicycle': '自行车',
+                'Walking': '步行'
+            };
+
+            // 定义两个不同颜色的标记图标
+            var blueIcon = L.icon({
+                iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png', // 默认蓝色图标
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+            });
+
+            var redIcon = L.icon({
+                iconUrl: './images/red_marker.png', // 使用有效的红色图标 URL
+                iconSize: [41, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34]
+            });
+
+            // 初始化地图并设置最大边界和初始视图
+            var map = L.map('map', {
+                worldCopyJump: true
+            }).setView([53.5, -8.0], 7); // 将初始视图设置为爱尔兰，缩放级别为7
+
+            // 添加地图图层
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // 加载本地标记数据
+            fetch('json/data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const coordinates = urlParams.get('coordinates');
+                    let targetMarker = null;
+
+                    data.forEach(marker => {
+                        // 使用蓝色图标添加已有的标记
+                        var markerInstance = L.marker(marker.coordinates, { icon: blueIcon }).addTo(map);
+
+                        var popupContent = L.DomUtil.create('div');
+                        popupContent.innerHTML = `
+                        <div class="popup-content">
+                            <b>${marker.title.cn}</b>
+                            <img src="${marker.img}" alt="${marker.title.cn}">
+                            <p>营业时间：${marker.opening_hours.cn}</p>
+                            <p>${marker.highlights.cn}</p>
+                            <a href="home_cn.html?highlight=${encodeURIComponent(marker.title.cn)}" class="popup-return-link">查看详细信息</a>
+                        </div>
+                    `;
+
+                        markerInstance.bindPopup(popupContent);
+
+                        if (coordinates && coordinates === `${marker.coordinates[0]},${marker.coordinates[1]}`) {
+                            targetMarker = markerInstance;
+                        }
+
+                        markerInstance.on('click', function () {
+                            markerInstance.openPopup();
+                        });
+                    });
+
+                    if (targetMarker) {
+                        map.setView(targetMarker.getLatLng(), 7.5);
+                        targetMarker.openPopup();
+                    }
+                })
+                .catch(error => console.error('加载标记时出错：', error));
+
+            var selectedLatLng;
+
+            // 用户在地图上点击以设置标记
+            document.getElementById('add-marker-btn').addEventListener('click', function () {
+                map.on('click', function (e) {
+                    selectedLatLng = e.latlng; // 获取用户点击的位置
+                    L.marker([selectedLatLng.lat, selectedLatLng.lng], { icon: redIcon }).addTo(map)
+                        .bindPopup('<b>您的标记</b><br>纬度: ' + selectedLatLng.lat + '<br>经度: ' + selectedLatLng.lng)
+                        .openPopup();
+                    map.off('click'); // 停止监听点击事件
+                    document.getElementById('user-form').style.display = 'block'; // 显示表单
+                });
+            });
+
+            // 处理表单提交
+            document.getElementById('marker-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // 防止页面重新加载
+
+                var formData = new FormData(event.target);
+                var markerData = {
+                    latitude: selectedLatLng.lat,
+                    longitude: selectedLatLng.lng,
+                    visitDate: formData.get('visit-date'),
+                    peopleCount: formData.get('people-count'),
+                    transport: formData.get('transport'),
+                    name: formData.get('name'),
+                    age: formData.get('age'),
+                    gender: formData.get('gender'),
+                    wechat: formData.get('wechat'),
+                    phone: formData.get('phone')
+                };
+
+                // 发送数据到服务器
+                fetch('http://localhost:3000/save-marker', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(markerData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('标记保存成功！');
+                        } else {
+                            alert('保存标记失败。');
+                        }
+                    })
+                    .catch(error => console.error('保存标记时出错：', error));
+            });
+
+            // 加载现有标记数据
+            fetch('http://localhost:3000/get-markers')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(markerData => {
+                        // 使用红色图标显示用户保存的标记
+                        L.marker([markerData.latitude, markerData.longitude], { icon: redIcon }).addTo(map)
+                            .bindPopup(
+                                `<div class="marker-popup-content">
+                                    <b>标记详情</b><br>
+                                    <p>访问日期：${markerData.visitDate}</p>
+                                    <p>人数：${markerData.peopleCount}</p>
+                                    <p>交通方式：${translateToChinese(markerData.transport)}</p>
+                                    <button onclick="showUserDetails('${markerData.name}', '${markerData.age}', '${translateToChinese(markerData.gender)}', '${markerData.wechat}', '${markerData.phone}', '${markerData.visitDate}', '${markerData.peopleCount}', '${translateToChinese(markerData.transport)}')">查看详情</button>
+                                </div>`
+                            );
+                    });
+                })
+                .catch(error => console.error('加载标记时出错：', error));
+
+            // 翻译函数
+            function translateToChinese(text) {
+                return translationMap[text] || text; // 如果找不到映射，返回原文
+            }
+
+            // 显示用户详细信息的弹窗
+            window.showUserDetails = function (name, age, gender, wechat, phone, visitDate, peopleCount, transport) {
+                // 设置弹窗内容
+                document.getElementById('modal-content').innerHTML = `
+                <h3>用户信息</h3>
+                <p><strong>姓名：</strong> ${name}</p>
+                <p><strong>年龄：</strong> ${age}</p>
+                <p><strong>性别：</strong> ${gender}</p>
+                <p><strong>微信号：</strong> ${wechat}</p>
+                <p><strong>电话：</strong> ${phone}</p>
+                <p><strong>访问日期：</strong> ${visitDate}</p>
+                <p><strong>人数：</strong> ${peopleCount}</p>
+                <p><strong>交通方式：</strong> ${transport}</p>
+            `;
+                // 显示弹窗
+                document.getElementById('modal').style.display = 'block';
+            };
+
+            // 关闭弹窗
+            document.getElementById('close-modal').addEventListener('click', function () {
+                document.getElementById('modal').style.display = 'none';
+            });
+
+        });
+    </script>
+
+
+</body>
+
+</html>

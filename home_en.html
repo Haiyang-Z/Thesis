@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>IrishTravelConnections</title>
+    <meta name="description" content="Meet your new partner">
+    <meta name="author" content="Haiyang Zheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="wrap-body">
+        <header>
+            <div class="nav-bar">
+                <div class="wrap-nav zerogrid">
+                    <div class="row">
+                        <div class="col-1-3">
+                            <div class="wrap-col">
+                                <div class="logo"><a href="#"><img src="images/logo.png" /></a></div>
+                            </div>
+                        </div>
+                        <div class="col-2-3">
+                            <div class="wrap-col f-right">
+                                <div id="menu">
+                                    <nav>
+                                        <ul>
+                                            <li class="active"><a href="home_en.html">Home</a></li>
+                                            <li><a href="map_en.html">Map</a></li>
+                                            <!-- Language Switch -->
+                                            <li><a href="home_cn.html"><img src="images/translation.png"
+                                                        alt="English translate to Chinese"></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-header">
+                <h1>Discover Ireland</h1>
+                <span>Journey with new Chinese companions!</span>
+                <center>
+                    <div class="match-button">
+                        <button onclick="match()">Start a New Journey</button>
+                    </div>
+                </center>
+
+                <!-- !!!!!!!!!!!!Time Widget!!!!!!!!!!!! -->
+                <div id="time-widget" class="time-widget">
+                    <h3>Current Time</h3>
+                    <p id="ireland-time">Ireland Time: Loading...</p>
+                    <p id="china-time">China Time: Loading...</p>
+                </div>
+            </div>
+
+            <!--////////////////////////////////////轮播图的js-->
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const header = document.querySelector('header');
+                    const images = ['./images/1.jpg', './images/2.jpg', './images/3.jpg', './images/4.jpg', './images/5.jpg', './images/6.jpg', './images/7.jpg'];
+                    let currentIndex = 0;
+
+                    function changeBackgroundImage() {
+                        currentIndex = (currentIndex + 1) % images.length; // loop
+                        header.style.backgroundImage = `url('${images[currentIndex]}')`;
+                    }
+
+                    setInterval(changeBackgroundImage, 5000);
+                });
+            </script>
+        </header>
+
+        <!--////////////////////////////////////Container-->
+        <section id="container">
+            <div class="wrap-container">
+                <!-- content-box-1 -->
+                <section class="content-box boxstyle-1 box-1">
+                    <div class="zerogrid">
+                        <div class="row wrap-box" id="content-box-1"><!--Start Box-->
+                            <!-- Dynamic content will be inserted here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!--////////////////////////////////////Footer-->
+        <footer>
+            <div class="zerogrid">
+                <div class="wrap-footer row">
+                    <!-- Company Info -->
+                    <div class="col-1-3">
+                        <p>Mardyke Hall, Mardyke Walk, Cork, Ireland</p>
+                        <p>Email: 123104052@umail.ucc.ie</p>
+                        <p>Phone: +353 87 7050685</p>
+                    </div>
+                    <!-- Quick Links -->
+                    <div class="col-1-3 quick-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="home_en.html">Home</a></li>
+                            <li><a href="map_en.html">Map</a></li>
+                        </ul>
+                    </div>
+                    <!-- Latest News -->
+                    <div class="col-1-3 latest-news">
+                        <h3>Latest News</h3>
+                        <ul>
+                            <li><a
+                                    href="https://www.ireland.ie/en/china/beijing/services/visas/check-if-you-need-a-visa/">Visa
+                                    Requirements for Chinese Tourists</a></li>
+                            <li><a
+                                    href="https://www.citizensinformation.ie/en/travel-and-recreation/travel-to-ireland/customs-regulations-for-travellers/">Customs
+                                    Regulations in Ireland</a></li>
+                            <li><a
+                                    href="https://www.ireland.ie/en/dfa/overseas-travel/know-before-you-go/safety-and-security/">Health
+                                    and Safety Guidelines</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <!-- ！！！！！！！！！！！弹窗容器！！！！！！！！！！！！！！！！！！！！！！！！！！！！ -->
+    <!-- 弹窗容器 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <button id="prevBtn" class="modal-nav-button">&#10094;</button> <!-- 左侧按钮 -->
+            <img id="modal-image" src="" alt="Image">
+            <button id="nextBtn" class="modal-nav-button">&#10095;</button> <!-- 右侧按钮 -->
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <!-- !!!!!!!!!!!!Weather Widget!!!!!!!!!!!! -->
+    <div id="weather-toggle" class="weather-toggle">
+        <button id="weather-btn" class="weather-btn">Quick Weather</button>
+    </div>
+
+    <div id="weather-widget" class="weather-widget hidden">
+        <div class="weather-header">
+            <h3></h3>
+            <button id="close-weather" class="close-weather">&times;</button>
+        </div>
+        <div id="weather-info">Loading weather data...</div>
+    </div>
+
+
+    <!-- 汇率转换Widget -->
+    <div id="exchange-widget-toggle" class="exchange-widget-toggle">
+        <button id="exchange-btn" class="exchange-btn">Easy Converter</button>
+    </div>
+
+    <div id="exchange-widget" class="exchange-widget hidden">
+        <div class="exchange-header">
+            <h3>Currency Converter</h3>
+            <button id="close-exchange" class="close-exchange">&times;</button>
+        </div>
+        <div class="exchange-content">
+            <label for="currency-input">Enter Amount:</label>
+            <input type="number" id="currency-input" placeholder="Amount">
+            <select id="currency-type">
+                <option value="CNY">CNY to EUR</option>
+                <option value="EUR">EUR to CNY</option>
+            </select>
+            <button id="convert-btn">Convert</button>
+            <p id="conversion-result"></p>
+        </div>
+    </div>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!Script to load JSON and generate content!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        // 添加到之前的 JavaScript 中
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentIndex = 0;
+            let data = [];
+
+            fetch('json/data.json')
+                .then(response => response.json())
+                .then(jsonData => {
+                    data = jsonData;
+                    const container = document.getElementById('content-box-1');
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const highlight = urlParams.get('highlight');
+                    let highlightedElement = null;
+
+                    data.forEach((item, index) => {
+                        const div = document.createElement('div');
+                        div.className = 'col-1-3';
+                        div.innerHTML = `
+                            <div class="wrap-col">
+                                <div class="post" id="post-${index}">
+                                    <img class="post-img" src="${item.img}" alt="${item.title.en}">
+                                    <h3 class="post-title">${item.title.en}</h3>
+                                    <div class="upload">
+                                        <p>Rating: ${item.stars} (${item.rating}/5)</p>
+                                        <p>Location: <a href="map_en.html?coordinates=${item.coordinates[0]},${item.coordinates[1]}">View on Map</a></p>
+                                        <p>Opening Hours: ${item.opening_hours.en}</p>
+                                        <p>Highlights: ${item.highlights.en}</p>
+                                        <p>Contact: <a href="mailto:${item.contact.en}">${item.contact.en}</a></p>                               
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        // 检查 URL 参数是否与当前标题匹配，如果匹配则标记元素
+                        if (highlight === item.title.en) {
+                            highlightedElement = div; // 记录需要闪烁的元素
+                        }
+
+                        // 为每个 post 的标题和图片添加点击事件
+                        const titleElement = div.querySelector('.post-title');
+                        const imageElement = div.querySelector('.post-img');
+
+                        const openModalWithItem = function () {
+                            openModal(index);
+                        };
+
+                        titleElement.addEventListener('click', openModalWithItem);
+                        imageElement.addEventListener('click', openModalWithItem);
+
+                        container.appendChild(div);
+                    });
+
+                    // 如果找到了需要闪烁的元素，滚动到它的位置，并添加闪烁效果
+                    if (highlightedElement) {
+                        highlightedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        flashElement(highlightedElement.querySelector('.post')); // 调用闪烁效果
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading JSON data:', error);
+                });
+
+            // 弹窗元素
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const closeBtn = document.getElementsByClassName('close')[0];
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // 打开弹窗并显示指定的图片和内容
+            function openModal(index) {
+                currentIndex = index;
+                const item = data[currentIndex];
+                modal.style.display = "block";
+                modalTitle.textContent = item.title.en;
+                modalImage.src = item.img;
+                // 使用 marked.parse 方法将 Markdown 转换为 HTML
+                modalDescription.innerHTML = marked.parse(item.details.en || 'No description available.');
+            }
+
+            // 关闭弹窗
+            closeBtn.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // 切换到上一张图片
+            prevBtn.onclick = function () {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : data.length - 1;
+                openModal(currentIndex);
+            }
+
+            // 切换到下一张图片
+            nextBtn.onclick = function () {
+                currentIndex = (currentIndex < data.length - 1) ? currentIndex + 1 : 0;
+                openModal(currentIndex);
+            }
+
+            // 当用户点击弹窗外部时关闭弹窗
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // 定义闪烁效果
+            function flashElement(element) {
+                element.style.transition = 'opacity 1s ease'; // 控制透明度变化的持续时间为1.5秒
+                element.style.opacity = '0.5'; // 首次降低透明度
+
+                // 第一次闪烁
+                setTimeout(() => {
+                    element.style.opacity = '1'; // 恢复透明度
+                    // 第二次闪烁
+                    setTimeout(() => {
+                        element.style.opacity = '0.5'; // 再次降低透明度
+                        setTimeout(() => {
+                            element.style.opacity = '1';
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }
+
+        });
+
+        function match() {
+            window.location.href = "map_en.html";
+        }
+    </script>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!time widget Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        function updateTime() {
+            const irelandTimeElement = document.getElementById('ireland-time');
+            const chinaTimeElement = document.getElementById('china-time');
+
+            // 获取当前时间
+            const now = new Date();
+
+            // 转换为爱尔兰时间（全英文格式：日期和时间）
+            const irelandTime = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Europe/Dublin',
+                weekday: 'long',  // 显示星期
+                year: 'numeric',
+                month: 'long',  // 显示完整的月份名称
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+
+            // 转换为中国时间（全英文格式：日期和时间）
+            const chinaTime = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Shanghai',
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(now);
+
+            // 更新 HTML 内容
+            irelandTimeElement.textContent = `Ireland Time: ${irelandTime}`;
+            chinaTimeElement.textContent = `China Time: ${chinaTime}`;
+        }
+
+        // 每秒更新一次时间
+        setInterval(updateTime, 1000);
+    </script>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!weather widget Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        // City data with coordinates
+        const cities = [
+            { name: 'Dublin', latitude: 53.3498, longitude: -6.2603 },
+            { name: 'Cork', latitude: 51.8985, longitude: -8.4756 },
+            { name: 'Galway', latitude: 53.2707, longitude: -9.0568 },
+            { name: 'Limerick', latitude: 52.6638, longitude: -8.6267 },
+            { name: 'Waterford', latitude: 52.2593, longitude: -7.1101 },
+            { name: 'Kilkenny', latitude: 52.6541, longitude: -7.2448 }
+        ];
+
+        // Weather descriptions based on code
+        const weatherConditions = {
+            0: "Clear Sky",
+            1: "Mainly Clear",
+            2: "Partly Cloudy",
+            3: "Overcast",
+            45: "Fog",
+            48: "Depositing Rime Fog",
+            51: "Light Drizzle",
+            53: "Moderate Drizzle",
+            55: "Dense Drizzle",
+            61: "Slight Rain",
+            63: "Moderate Rain",
+            65: "Heavy Rain",
+            80: "Rain Showers",
+            95: "Thunderstorm"
+        };
+
+        // Load weather data
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherInfo = document.getElementById('weather-info');
+            weatherInfo.innerHTML = ''; // Clear the content
+
+            // Fetch weather data for each city
+            cities.forEach(city => {
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Europe/Dublin`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const weatherData = data.daily;
+
+                        // Get weather descriptions
+                        const todayWeather = weatherConditions[weatherData.weathercode[0]];
+                        const tomorrowWeather = weatherConditions[weatherData.weathercode[1]];
+
+                        const cityWeather = `
+                            <div class="city-weather">
+                                <h4>${city.name}</h4>
+                                <p>Today: Max ${weatherData.temperature_2m_max[0]}°C, Min ${weatherData.temperature_2m_min[0]}°C, ${todayWeather}</p>
+                                <p>Tomorrow: Max ${weatherData.temperature_2m_max[1]}°C, Min ${weatherData.temperature_2m_min[1]}°C, ${tomorrowWeather}</p>
+                            </div>
+                        `;
+                        weatherInfo.innerHTML += cityWeather;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching weather data:', error);
+                        weatherInfo.innerHTML += `<div class="city-weather"><h4>${city.name}</h4><p>Unable to load weather data.</p></div>`;
+                    });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherBtn = document.getElementById('weather-btn');
+            const weatherWidget = document.getElementById('weather-widget');
+            const closeWeatherBtn = document.getElementById('close-weather');
+
+            // Show the weather widget when button is clicked
+            weatherBtn.addEventListener('click', function () {
+                weatherWidget.classList.add('visible');
+                weatherBtn.style.display = 'none'; // Hide the button
+            });
+
+            // Hide the weather widget when close button is clicked
+            closeWeatherBtn.addEventListener('click', function () {
+                weatherWidget.classList.remove('visible');
+                weatherBtn.style.display = 'block'; // Show the button
+            });
+        });
+    </script>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!exchange widget Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const exchangeBtn = document.getElementById('exchange-btn');
+            const exchangeWidget = document.getElementById('exchange-widget');
+            const closeExchangeBtn = document.getElementById('close-exchange');
+            const convertBtn = document.getElementById('convert-btn');
+            const currencyInput = document.getElementById('currency-input');
+            const conversionResult = document.getElementById('conversion-result');
+            const currencyType = document.getElementById('currency-type');
+
+            // 显示汇率转换部件
+            exchangeBtn.addEventListener('click', function () {
+                exchangeWidget.classList.add('visible');
+                exchangeBtn.style.display = 'none';
+            });
+
+            // 隐藏汇率转换部件并清空输入
+            closeExchangeBtn.addEventListener('click', function () {
+                exchangeWidget.classList.remove('visible');
+                exchangeBtn.style.display = 'block';
+                currencyInput.value = ''; // 清空输入框
+                conversionResult.textContent = 'Conversion Result: --'; // 重置结果文本
+            });
+
+            // 汇率转换功能
+            convertBtn.addEventListener('click', function () {
+                const amount = parseFloat(currencyInput.value);
+
+                // 验证输入是否为正数且不为零
+                if (isNaN(amount) || amount <= 0) {
+                    conversionResult.textContent = "Amount must be greater than 0.";
+                    return;
+                }
+
+
+                const exchangeRate = 7.87;
+                let result;
+
+                if (currencyType.value === "CNY") {
+                    result = amount / exchangeRate;
+                    conversionResult.textContent = `Result: ${amount} CNY = ${result.toFixed(2)} EUR`;
+                } else {
+                    result = amount * exchangeRate;
+                    conversionResult.textContent = `Result: ${amount} EUR = ${result.toFixed(2)} CNY`;
+                }
+            });
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

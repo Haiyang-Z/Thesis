@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>IrishTravelConnections</title>
+    <meta name="description" content="Meet your new partner">
+    <meta name="author" content="Haiyang Zheng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- CSS -->
+    <!-- <link rel="stylesheet" href="css/zerogrid.css"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+</head>
+
+<body>
+    <div class="wrap-body">
+        <header class="no-bg">
+            <div class="nav-bar">
+                <div class="wrap-nav zerogrid">
+                    <div class="row">
+                        <div class="col-1-3">
+                            <div class="wrap-col">
+                                <div class="logo"><a href="#"><img src="images/logo.png" /></a></div>
+                            </div>
+                        </div>
+                        <div class="col-2-3">
+                            <div class="wrap-col f-right">
+                                <div id="menu">
+                                    <nav>
+                                        <ul>
+                                            <li><a href="home_en.html">Home</a></li>
+                                            <li class="active"><a href="map_en.html">Map</a></li>
+                                            <li><a href="map_cn.html"><img src="images/translation.png"
+                                                        alt="English translate to Chinese"></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Container -->
+        <section id="container">
+            <div class="wrap-container">
+                <!-- Map Section -->
+                <span class="map-title">Explore new travel destination!</span>
+                <section id="map-section">
+                    <div id="map"></div>
+                </section>
+
+
+                <!-- new stuff here -->
+
+                <div id="user-form">
+                    <form id="marker-form">
+                        <!-- 合并后的标题 -->
+                        <h3>Plan Your Journey</h3>
+                
+                        <div class="form-section-wrapper">
+                            <!-- 左侧部分：Plan Your Journey -->
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="visit-date">Visit Date:</label>
+                                    <input type="date" id="visit-date" name="visit-date" required>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="people-count">Number of People:</label>
+                                    <input type="number" id="people-count" name="people-count" min="1" required>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="transport">Transport Mode:</label>
+                                    <select id="transport" name="transport" required>
+                                        <option value="Car">Self-driving</option>
+                                        <option value="Bus">Coach</option>
+                                        <option value="Train">Train</option>
+                                        <option value="Bicycle">Bicycle</option>
+                                        <option value="Walking">Walking</option>
+                                    </select>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number:</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                
+                            <!-- 右侧部分：Your Information -->
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="age">Age:</label>
+                                    <input type="number" id="age" name="age" min="1" required>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="gender">Gender:</label>
+                                    <select id="gender" name="gender" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label for="wechat">WeChat ID:</label>
+                                    <input type="text" id="wechat" name="wechat" required>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- 底部按钮容器 -->
+                        <div class="button-container">
+                            <button id="add-marker-btn" type="button">Set Your Destination on the Map</button>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
+
+            </div>
+        </section>
+
+        <!--////////////////////////////////////Footer-->
+        <footer>
+            <div class="zerogrid">
+                <div class="wrap-footer row">
+                    <!-- Company Info -->
+                    <div class="col-1-3">
+                        <p>Mardyke Hall, Mardyke Walk, Cork, Ireland</p>
+                        <p>Email: 123104052@umail.ucc.ie</p>
+                        <p>Phone: +353 87 7050685</p>
+                    </div>
+                    <!-- Quick Links -->
+                    <div class="col-1-3 quick-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="home_en.html">Home</a></li>
+                            <li><a href="map_en.html">Map</a></li>
+                            <li><a href="match_en.html">Match</a></li>
+                            <!-- <li><a href="contact_en.html">Contact</a></li> -->
+                        </ul>
+                    </div>
+                    <!-- Latest News -->
+                    <div class="col-1-3 latest-news">
+                        <h3>Latest News</h3>
+                        <ul>
+                            <li><a
+                                    href="https://www.ireland.ie/en/china/beijing/services/visas/check-if-you-need-a-visa/">Visa
+                                    Requirements for Chinese Tourists</a></li>
+                            <li><a
+                                    href="https://www.citizensinformation.ie/en/travel-and-recreation/travel-to-ireland/customs-regulations-for-travellers/">Customs
+                                    Regulations in Ireland</a></li>
+                            <li><a
+                                    href="https://www.ireland.ie/en/dfa/overseas-travel/know-before-you-go/safety-and-security/">Health
+                                    and Safety Guidelines</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+
+    <!-- 用户信息弹窗 -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-dialog">
+            <span id="close-modal" class="close-button">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- !!!!!!!!!!!!Weather Widget!!!!!!!!!!!! -->
+    <div id="weather-toggle" class="weather-toggle">
+        <button id="weather-btn" class="weather-btn">Quick Weather</button>
+    </div>
+
+    <div id="weather-widget" class="weather-widget hidden">
+        <div class="weather-header">
+            <h3></h3>
+            <button id="close-weather" class="close-weather">&times;</button>
+        </div>
+        <div id="weather-info">Loading weather data...</div>
+    </div>
+
+
+    <!-- 汇率转换Widget -->
+    <div id="exchange-widget-toggle" class="exchange-widget-toggle">
+        <button id="exchange-btn" class="exchange-btn">Easy Converter</button>
+    </div>
+
+    <div id="exchange-widget" class="exchange-widget hidden">
+        <div class="exchange-header">
+            <h3>Currency Converter</h3>
+            <button id="close-exchange" class="close-exchange">&times;</button>
+        </div>
+        <div class="exchange-content">
+            <label for="currency-input">Enter Amount:</label>
+            <input type="number" id="currency-input" placeholder="Amount">
+            <select id="currency-type">
+                <option value="CNY">CNY to EUR</option>
+                <option value="EUR">EUR to CNY</option>
+            </select>
+            <button id="convert-btn">Convert</button>
+            <p id="conversion-result"></p>
+        </div>
+    </div>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!weather widget Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        // City data with coordinates
+        const cities = [
+            { name: 'Dublin', latitude: 53.3498, longitude: -6.2603 },
+            { name: 'Cork', latitude: 51.8985, longitude: -8.4756 },
+            { name: 'Galway', latitude: 53.2707, longitude: -9.0568 },
+            { name: 'Limerick', latitude: 52.6638, longitude: -8.6267 },
+            { name: 'Waterford', latitude: 52.2593, longitude: -7.1101 },
+            { name: 'Kilkenny', latitude: 52.6541, longitude: -7.2448 }
+        ];
+
+        // Weather descriptions based on code
+        const weatherConditions = {
+            0: "Clear Sky",
+            1: "Mainly Clear",
+            2: "Partly Cloudy",
+            3: "Overcast",
+            45: "Fog",
+            48: "Depositing Rime Fog",
+            51: "Light Drizzle",
+            53: "Moderate Drizzle",
+            55: "Dense Drizzle",
+            61: "Slight Rain",
+            63: "Moderate Rain",
+            65: "Heavy Rain",
+            80: "Rain Showers",
+            95: "Thunderstorm"
+        };
+
+        // Load weather data
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherInfo = document.getElementById('weather-info');
+            weatherInfo.innerHTML = ''; // Clear the content
+
+            // Fetch weather data for each city
+            cities.forEach(city => {
+                fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Europe/Dublin`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const weatherData = data.daily;
+
+                        // Get weather descriptions
+                        const todayWeather = weatherConditions[weatherData.weathercode[0]];
+                        const tomorrowWeather = weatherConditions[weatherData.weathercode[1]];
+
+                        const cityWeather = `
+                            <div class="city-weather">
+                                <h4>${city.name}</h4>
+                                <p>Today: Max ${weatherData.temperature_2m_max[0]}°C, Min ${weatherData.temperature_2m_min[0]}°C, ${todayWeather}</p>
+                                <p>Tomorrow: Max ${weatherData.temperature_2m_max[1]}°C, Min ${weatherData.temperature_2m_min[1]}°C, ${tomorrowWeather}</p>
+                            </div>
+                        `;
+                        weatherInfo.innerHTML += cityWeather;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching weather data:', error);
+                        weatherInfo.innerHTML += `<div class="city-weather"><h4>${city.name}</h4><p>Unable to load weather data.</p></div>`;
+                    });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherBtn = document.getElementById('weather-btn');
+            const weatherWidget = document.getElementById('weather-widget');
+            const closeWeatherBtn = document.getElementById('close-weather');
+
+            // Show the weather widget when button is clicked
+            weatherBtn.addEventListener('click', function () {
+                weatherWidget.classList.add('visible');
+                weatherBtn.style.display = 'none'; // Hide the button
+            });
+
+            // Hide the weather widget when close button is clicked
+            closeWeatherBtn.addEventListener('click', function () {
+                weatherWidget.classList.remove('visible');
+                weatherBtn.style.display = 'block'; // Show the button
+            });
+        });
+    </script>
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!exchange widget Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const exchangeBtn = document.getElementById('exchange-btn');
+            const exchangeWidget = document.getElementById('exchange-widget');
+            const closeExchangeBtn = document.getElementById('close-exchange');
+            const convertBtn = document.getElementById('convert-btn');
+            const currencyInput = document.getElementById('currency-input');
+            const conversionResult = document.getElementById('conversion-result');
+            const currencyType = document.getElementById('currency-type');
+
+            // 显示汇率转换部件
+            exchangeBtn.addEventListener('click', function () {
+                exchangeWidget.classList.add('visible');
+                exchangeBtn.style.display = 'none';
+            });
+
+            // 隐藏汇率转换部件并清空输入
+            closeExchangeBtn.addEventListener('click', function () {
+                exchangeWidget.classList.remove('visible');
+                exchangeBtn.style.display = 'block';
+                currencyInput.value = ''; // 清空输入框
+                conversionResult.textContent = 'Conversion Result: --'; // 重置结果文本
+            });
+
+            // 汇率转换功能
+            convertBtn.addEventListener('click', function () {
+                const amount = parseFloat(currencyInput.value);
+
+                // 验证输入是否为正数且不为零
+                if (isNaN(amount) || amount <= 0) {
+                    conversionResult.textContent = "Amount must be greater than 0.";
+                    return;
+                }
+
+
+                const exchangeRate = 7.87;
+                let result;
+
+                if (currencyType.value === "CNY") {
+                    result = amount / exchangeRate;
+                    conversionResult.textContent = `Result: ${amount} CNY = ${result.toFixed(2)} EUR`;
+                } else {
+                    result = amount * exchangeRate;
+                    conversionResult.textContent = `Result: ${amount} EUR = ${result.toFixed(2)} CNY`;
+                }
+            });
+        });
+    </script>
+
+
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!map Script!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+    <!-- 引入 Leaflet.js -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 定义两个不同颜色的标记图标
+            var blueIcon = L.icon({
+                iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png', // 默认蓝色图标
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+            });
+
+            var redIcon = L.icon({
+                iconUrl: './images/red_marker.png', // 使用有效的红色图标 URL
+                iconSize: [41, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34]
+            });
+
+            // 初始化地图并设置最大边界和初始视图
+            var map = L.map('map', {
+                worldCopyJump: true
+            }).setView([53.5, -8.0], 7); // 将初始视图设置为爱尔兰，缩放级别为7
+
+            // 添加地图图层
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // 加载本地标记数据
+            fetch('json/data.json')
+                .then(response => response.json())
+                .then(data => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const coordinates = urlParams.get('coordinates');
+                    let targetMarker = null;
+
+                    data.forEach(marker => {
+                        // 使用蓝色图标添加已有的标记
+                        var markerInstance = L.marker(marker.coordinates, { icon: blueIcon }).addTo(map);
+
+                        var popupContent = L.DomUtil.create('div');
+                        popupContent.innerHTML = `
+                        <div class="popup-content">
+                            <b>${marker.title.en}</b>
+                            <img src="${marker.img}" alt="${marker.title.en}">
+                            <p>Opening Hours: ${marker.opening_hours.en}</p>
+                            <p>${marker.highlights.en}</p>
+                            <a href="home_en.html?highlight=${encodeURIComponent(marker.title.en)}" class="popup-return-link">View detailed information</a>
+                        </div>
+                    `;
+
+                        markerInstance.bindPopup(popupContent);
+
+                        if (coordinates && coordinates === `${marker.coordinates[0]},${marker.coordinates[1]}`) {
+                            targetMarker = markerInstance;
+                        }
+
+                        markerInstance.on('click', function () {
+                            markerInstance.openPopup();
+                        });
+                    });
+
+                    if (targetMarker) {
+                        map.setView(targetMarker.getLatLng(), 7.5);
+                        targetMarker.openPopup();
+                    }
+                })
+                .catch(error => console.error('Error loading markers:', error));
+
+            var selectedLatLng;
+
+            // 用户在地图上点击以设置标记
+            document.getElementById('add-marker-btn').addEventListener('click', function () {
+                map.on('click', function (e) {
+                    selectedLatLng = e.latlng; // 获取用户点击的位置
+                    L.marker([selectedLatLng.lat, selectedLatLng.lng], { icon: redIcon }).addTo(map)
+                        .bindPopup('<b>Your Marker</b><br>Latitude: ' + selectedLatLng.lat + '<br>Longitude: ' + selectedLatLng.lng)
+                        .openPopup();
+                    map.off('click'); // 停止监听点击事件
+                    document.getElementById('user-form').style.display = 'block'; // 显示表单
+                });
+            });
+
+            // 处理表单提交
+            document.getElementById('marker-form').addEventListener('submit', function (event) {
+                event.preventDefault(); // 防止页面重新加载
+
+                var formData = new FormData(event.target);
+                var markerData = {
+                    latitude: selectedLatLng.lat,
+                    longitude: selectedLatLng.lng,
+                    visitDate: formData.get('visit-date'),
+                    peopleCount: formData.get('people-count'),
+                    transport: formData.get('transport'),
+                    name: formData.get('name'),
+                    age: formData.get('age'),
+                    gender: formData.get('gender'),
+                    wechat: formData.get('wechat'),
+                    phone: formData.get('phone')
+                };
+
+                // 发送数据到服务器
+                fetch('http://localhost:3000/save-marker', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(markerData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Marker saved successfully!');
+                        } else {
+                            alert('Failed to save marker.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+
+            // 加载现有标记数据
+            // 加载现有标记数据
+            fetch('http://localhost:3000/get-markers')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(markerData => {
+                        // 使用红色图标显示用户保存的标记
+                        L.marker([markerData.latitude, markerData.longitude], { icon: redIcon }).addTo(map)
+                            .bindPopup(
+                                `<div class="marker-popup-content">
+                                    <b>Marker Details</b><br>
+                                    <p>Visit Date: ${markerData.visitDate}</p>
+                                    <p>Number of People: ${markerData.peopleCount}</p>
+                                    <p>Transport: ${markerData.transport}</p>
+                                    <button onclick="showUserDetails('${markerData.name}', '${markerData.age}', '${markerData.gender}', '${markerData.wechat}', '${markerData.phone}', '${markerData.visitDate}', '${markerData.peopleCount}', '${markerData.transport}')">View Details</button>
+                                </div>`
+                            );
+                    });
+                })
+                .catch(error => console.error('Error loading markers:', error));
+
+            // 显示用户详细信息的弹窗
+            window.showUserDetails = function (name, age, gender, wechat, phone, visitDate, peopleCount, transport) {
+                // 设置弹窗内容
+                document.getElementById('modal-content').innerHTML = `
+                    <h3>User Information</h3>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Age:</strong> ${age}</p>
+                    <p><strong>Gender:</strong> ${gender}</p>
+                    <p><strong>WeChat ID:</strong> ${wechat}</p>
+                    <p><strong>Phone:</strong> ${phone}</p>
+                    <p><strong>Visit Date:</strong> ${visitDate}</p>
+                    <p><strong>Number of People:</strong> ${peopleCount}</p>
+                    <p><strong>Transport:</strong> ${transport}</p>
+                `;
+                // 显示弹窗
+                document.getElementById('modal').style.display = 'block';
+            };
+
+
+            // 关闭弹窗
+            document.getElementById('close-modal').addEventListener('click', function () {
+                document.getElementById('modal').style.display = 'none';
+            });
+
+        });
+    </script>
+
+
+
+
+
+</body>
+
+</html>
